@@ -25,26 +25,26 @@ func newDB() memoryDB {
 	return memoryDB{items: items}
 }
 
-func (m memoryDB) set(key, value string) {
+func (m *memoryDB) set(key, value string) {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	m.items[key] = value
 }
 
-func (m memoryDB) get(key string) (string, bool) {
+func (m *memoryDB) get(key string) (string, bool) {
 	m.mu.RLock()
 	defer m.mu.RUnlock()
 	value, found := m.items[key]
 	return value, found
 }
 
-func (m memoryDB) delete(key string) {
+func (m *memoryDB) delete(key string) {
 	m.mu.Lock()
 	defer m.mu.Unlock()
 	delete(m.items, key)
 }
 
-func (m memoryDB) save() {
+func (m *memoryDB) save() {
 	f, err := os.Create("db.json")
 	if err != nil {
 		fmt.Println("could not create file", err.Error())

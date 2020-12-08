@@ -5,7 +5,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/steevehook/memory-db/server"
+	"github.com/chill-and-code/memory-db/server"
 )
 
 func main() {
